@@ -58,7 +58,7 @@ def census_3var(sheet, mp):
             id_region = col0[row_var2]
             print "Region ", id_region, " --> ", name_region
             continue
-        elif variable2 == 'RESUMEN':
+        elif (variable2 == 'RESUMEN' or variable2 == 'SUMMARY'):
             name_region = 'RESUMEN'
             continue
         
@@ -117,7 +117,8 @@ def census_2var(sheet,mp):
     info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', 'Dwellings'))
     name_region = 'Nacional'
     id_region = 'AREA # 00'
-    
+
+
     for row_var2, variable2 in enumerate(col0):
 
         # Identify the region
@@ -125,6 +126,10 @@ def census_2var(sheet,mp):
             name_region = sheet.iloc[row_var2, 1]
             id_region = col0[row_var2]
             print "Region ", id_region, " --> ", name_region
+            continue
+
+        elif variable2 == 'RESUMEN' or variable2 == 'SUMMARY':
+            name_region = 'RESUMEN'
             continue
         
         # Check if the variable2 is present in the mapping scheme
@@ -150,7 +155,7 @@ def census_2var(sheet,mp):
         elif variable2 == 'Total':
 #            print '---End of the region {} ---'.format(name_region)
             continue
-        elif variable2 == 'RESUMEN':
+        elif variable2 == 'RESUMEN' or variable2 == 'SUMMARY':
 #            print '-----END-----'
             break
         else:
