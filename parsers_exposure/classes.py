@@ -138,7 +138,7 @@ def save_dwellings_csv(self, dwellings, save_folder_name, save_regions):
     save_as = ('{}/{}-{}').format(self.folder, self.name, self.level)       
     
     dwellings.Dwellings = dwellings.Dwellings.round(1)
-    dwellings.to_csv(save_as + '-dwelings.csv', index=False)
+    dwellings.to_csv(save_as + '-dwellings.csv', index=False)
     
     if save_regions == True:
         regions = dwellings[['id','Region','Taxonomy','Dwellings']]
