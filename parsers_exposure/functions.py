@@ -64,11 +64,11 @@ def split_tax(name):
         
 def info_append(info, values, id_region, name_region, dwellings):
     '''Function to append values into a single DataFrame '''
-    if isinstance(dwellings, int)!= True  and isinstance(dwellings, float) != True:
+    if isinstance(dwellings, (str, unicode)) == True:
         dwl = 0
     else:
         for i,var in enumerate(values):
-            dwl = dwellings*var[0]
+            dwl = dwellings * var[0]
             info.loc[len(info)] = [id_region, name_region, var[1], dwl]
     return info
 
