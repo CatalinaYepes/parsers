@@ -81,15 +81,15 @@ def mapping(var1, var2, var3, mp, num_variables):
     'mp' is the DataFrame that cointains the mapping scheme.
     """
     # Find the location for variable1
-    col_var1 = [i for i, material in enumerate(mp.var1) if str(material).find(var1) != -1]
+    col_var1 = [i for i, material in enumerate(mp.var1) if str(material) == var1]
     
     if num_variables is not 'one':
         # Find the location for variable2
-        row_var2 = [i for i, material in enumerate(mp.col0) if str(material).find(var2) != -1]        
+        row_var2 = [i for i, material in enumerate(mp.col0) if str(material) == var2]        
         # Find the initial taxonomy classification
-        tax1 = mp.iloc[row_var2[0],col_var1[0]]
+        tax1 = mp.iloc[row_var2[0], col_var1[0]]
     else:
-        tax1 = mp.iloc[-1,col_var1[0]]
+        tax1 = mp.iloc[-1, col_var1[0]]
 
     assert (tax1 != []), 'Error, Taxonomy empty'
     taxo = split_tax(tax1)

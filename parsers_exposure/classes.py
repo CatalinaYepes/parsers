@@ -56,7 +56,7 @@ class ReadCensus:
         self.num_variables = num_var
         
             
-    def mapping_matrix(self, mapping_sheet='Mapping', row_var1=None, row_var3=None, print_vars=False):
+    def mapping_matrix(self, mapping_sheet='Mapping', row_var1=0, row_var3=None, print_vars=False):
         ''' Read and parse MAPPING MATRIX 
             row_var1: Row index for variable 1 in the mapping scheme (starting in zero)
             row_var3: Row index for variable 3 in the mapping scheme (starting in zero)
@@ -66,7 +66,7 @@ class ReadCensus:
         self.mp.var1 = self.mp.iloc[row_var1 - 1]
         self.mp.col0 = self.mp[0]
         if self.num_variables == 'three':
-            self.mp.var2 = self.mp[0][: row_var3 - 1]
+            self.mp.var2 = self.mp[0][row_var1 : row_var3 - 1]
             self.mp.var3 = self.mp[0][row_var3 : ]
             self.mp.second_mapping = self.mp.iloc[row_var3 - 1] 
             if print_vars == True:
