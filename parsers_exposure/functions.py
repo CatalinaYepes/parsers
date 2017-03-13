@@ -38,7 +38,7 @@ import pandas as pd
 def contain(values_list, text):
     for data in values_list:
         validation = 'Incorrect'
-        if str(data).find(str(text)) != -1 and pd.isnull(text) != True:        
+        if str(data).find(str(text)) == 0 and pd.isnull(text) != True:        
             validation = 'Correct'
             break                     
     return validation
