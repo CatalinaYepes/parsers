@@ -31,17 +31,16 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     **NOTE: ONLY columns with numerical values are added to the shapefile    
     '''
 
-    #  3.1) Read shapefile
+    #  1) Read shapefile
     #  ------------------------------------------------------------------------
     sf = shapefile.Reader(shape_file)
     
     fields = [x[0] for x in sf.fields[1:]] 
-    #print '\n Shapefile columns: \n %s \n' % fields  
-    
+    #print '\n Shapefile columns: \n %s \n' % fields     
     shape = pd.DataFrame(sf.records(), columns=fields)
     
     
-    #  3.2) Read data file and select columns
+    #  2) Read data file and select columns
     #  ------------------------------------------------------------------------
     data = pd.read_csv(data_file)
     
@@ -58,13 +57,10 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
         
     if not join_data_by in data.columns:
         data = join_col.join(data)
-    add_cols = data.drop(join_data_by, axis=1).columns
+    add_cols = data.drop(join_data_by, axis=1).columns    
+    #print '\n Column headers in data: \n', list(data.columns)    
     
-    print '\n Column headers in data: \n'
-    print list(data.columns)
-    
-    
-    #  3.3) Additional checks
+    #  3) Additional checks
     #  ------------------------------------------------------------------------
     if not data[join_data_by].dtypes == shape[join_shape_by].dtypes:
         data[join_data_by] = data[join_data_by].astype(str)
@@ -73,17 +69,19 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
         assert (data[join_data_by].dtypes == shape[join_shape_by].dtypes), \
             '\n the columns to join have different types: \n join data: {} \n join shape: {}'.format(data[join_data_by].dtypes, shape[join_shape_by].dtypes)
 
-      
-    #  3.4) Join attributes
+    #  4) Join attributes
     #  ------------------------------------------------------------------------
     # sum the duplicated values for the data column to join
     group_data = data.groupby(join_data_by, as_index=False).sum()
     
     records = pd.merge(left=shape, right=group_data, how='left', left_on=join_shape_by, right_on=join_data_by)
-    records.drop(join_data_by, axis=1, inplace=True)
+    records.drop(join_data_by, axis=1, inplace=True)    
     records.fillna(0, inplace=True)
+
+    # Raise error when columns are not properly merged
+    assert (sum(records[columns[0]]) != 0), 'Error when merging data. Check the columns to merge'
     
-    #  3.5) Create shape file with new attributes 
+    #  5) Create shape file with new attributes 
     #  ------------------------------------------------------------------------
     w = shapefile.Writer() # Create a new shapefile and specify additional columns
     w._shapes.extend(sf.shapes()) # Copy over the geometry without any changes
@@ -102,23 +100,19 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
         save_as = shape_file.split('.')[0] + '_join'
     print '\n Saving shape file in %s' % save_as
     w.save(save_as) 
+
 #    return records
 
+#%%
 ##############################################################################
 ##  TEST FUNCTION
 ##############################################################################
-
-country = 'col'
-if country == 'arg' or country == 'col':
-    level = 2
-else:
-    level = 3
         
-shape_file = 'maps/shape_files/{}-l{}'.format(country, level)
-data_file = 'outputs/outputs_v6/risk_sumary-{}.csv'.format(country)
-join_data_by = 'id'
-join_shape_by = 'ID'   # A check should be added in case the join fields have differente type (int, float or str) 
-cols = ['Buildings', 'AAL', 'Tot_cost', 'AALR']
-output_file ='maps/maps_v6/risk-{}-l{}'.format(country, level)
-
-join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns= cols, save_as= output_file)
+#shape_file = 'test_join_to_shape/test_shape.shp'
+#data_file = 'test_join_to_shape/test_data.csv'
+#join_data_by = 'id_1'
+#join_shape_by = 'id_string'   # A check should be added in case the join fields have differente type (int, float or str) 
+#cols = ['Buildings', 'Tot_cost', 'Population']
+#output_file ='test_join_to_shape/output_shape'
+#
+#cata = join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns= cols, save_as= output_file)
