@@ -63,8 +63,8 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     #  3) Additional checks
     #  ------------------------------------------------------------------------
     if not data[join_data_by].dtypes == shape[join_shape_by].dtypes:
-        data[join_data_by] = data[join_data_by].astype(str)
-        shape[join_shape_by] = shape[join_shape_by].astype(str)
+        data[join_data_by] = data[join_data_by].astype(float)
+        shape[join_shape_by] = shape[join_shape_by].astype(float)
         
         assert (data[join_data_by].dtypes == shape[join_shape_by].dtypes), \
             '\n the columns to join have different types: \n join data: {} \n join shape: {}'.format(data[join_data_by].dtypes, shape[join_shape_by].dtypes)
