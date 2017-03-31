@@ -13,9 +13,10 @@
         L is for logical data (boolean). The values it can receive are 1, 0, y, n, Y, N, T, F, True and False
 """
 
+import sys    # sys.setdefaultencoding is cancelled by site.py
 import shapefile
 import pandas as pd
-import sys    # sys.setdefaultencoding is cancelled by site.py
+
 reload(sys)    # to re-enable sys.setdefaultencoding()
 sys.setdefaultencoding('utf-8')
 
@@ -60,6 +61,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     add_cols = data.drop(join_data_by, axis=1).columns    
     #print '\n Column headers in data: \n', list(data.columns)    
     
+
     #  3) Additional checks
     #  ------------------------------------------------------------------------
     if not data[join_data_by].dtypes == shape[join_shape_by].dtypes:
@@ -68,6 +70,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
         
         assert (data[join_data_by].dtypes == shape[join_shape_by].dtypes), \
             '\n the columns to join have different types: \n join data: {} \n join shape: {}'.format(data[join_data_by].dtypes, shape[join_shape_by].dtypes)
+
 
     #  4) Join attributes
     #  ------------------------------------------------------------------------
@@ -81,6 +84,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     # Raise error when columns are not properly merged
     assert (sum(records[columns[0]]) != 0), 'Error when merging data. Check the columns to merge'
     
+
     #  5) Create shape file with new attributes 
     #  ------------------------------------------------------------------------
     w = shapefile.Writer() # Create a new shapefile and specify additional columns
@@ -101,18 +105,4 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     print '\n Saving shape file in %s' % save_as
     w.save(save_as) 
 
-#    return records
-
-#%%
-##############################################################################
-##  TEST FUNCTION
-##############################################################################
-        
-#shape_file = 'test_join_to_shape/test_shape.shp'
-#data_file = 'test_join_to_shape/test_data.csv'
-#join_data_by = 'id_1'
-#join_shape_by = 'id_string'   # A check should be added in case the join fields have differente type (int, float or str) 
-#cols = ['Buildings', 'Tot_cost', 'Population']
-#output_file ='test_join_to_shape/output_shape'
-#
-#cata = join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns= cols, save_as= output_file)
+    return records

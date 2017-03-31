@@ -33,11 +33,11 @@
 Classes for parsing an exposure model using census data
 
 """
-
+import sys    # sys.setdefaultencoding is cancelled by site.py
 import pandas as pd
 import parse_census
 import functions
-import sys    # sys.setdefaultencoding is cancelled by site.py
+
 reload(sys)    # to re-enable sys.setdefaultencoding()
 sys.setdefaultencoding('utf-8')
 
@@ -138,13 +138,13 @@ def save_dwellings_csv(self, dwellings, save_folder_name, save_regions):
     save_as = ('{}/{}-{}').format(self.folder, self.name, self.level)       
     
     dwellings.Dwellings = dwellings.Dwellings.round(1)
-    dwellings.to_csv(save_as + '-dwellings.csv', index=False)
+    dwellings.to_csv(save_as + '-dwellings.csv', index=False, encoding='utf-8')
     
     if save_regions == True:
         regions = dwellings[['id','Region','Taxonomy','Dwellings']]
         regions = regions.groupby(['id','Region']).sum() 
         regions.Dwellings = regions.Dwellings.round(1)
-        regions.to_csv(save_as + '-regions.csv')        
+        regions.to_csv(save_as + '-regions.csv', index=False, encoding='utf-8')        
     
     print '''----- end -----
     '''
