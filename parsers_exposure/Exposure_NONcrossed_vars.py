@@ -45,7 +45,9 @@ The user can parse information based on one, two or three variables:
     
 """
 import os
+
 import classes
+from mapping_matrix import mapping_matrix
 
 folder = os.chdir('/Users/catalinayepes/python_code/parsers_exposure')
 file_location = 'example-data-noncrossed_variables.xlsx'        
@@ -53,10 +55,10 @@ file_location = 'example-data-noncrossed_variables.xlsx'
 
 nickname = 'example'  # to add to the saved file
 num_var = 'two' # Number of variables in the data (small letter)
-single_var = classes.ReadCensus(nickname, file_location, num_var)
+#single_var = classes.ReadCensus(nickname, file_location, num_var)
 
-mapping_sheet = 'mapping_v1_v2' # name or location of mapping matrix
-single_var.mapping_matrix(mapping_sheet, row_var1=1, print_vars=True)
+mp = mapping_matrix(file_location, num_variables='one', print_vars=True, sheetname='mapping_v1_v2', header=1)
+
 
 #parse_sheet = 'example_1var' # name or location of sheet to parse (example: 0 or 'Sheet1')
 #save_folder_name = 'example_1var' #folder name to save parsed data
