@@ -31,12 +31,13 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+import tqdm
 
 import functions
-from mapping_matrix import mapping_matrix
 
-def parse_1var(data, mapping, data_type='Dwellings'):
-    """Parse building data using 1 variable.
+def parse_1var(data, mapping):
+    """
+    Parse building data using ONE variable.
     
     :param data: a DataFrame with data to use, organised as
                  - Row_1: Column headers
@@ -44,42 +45,35 @@ def parse_1var(data, mapping, data_type='Dwellings'):
                  - Column_2: Region_name
                  
     :param mapping: a :class: mapping scheme
-
-    :param data_type: Header to add in the output data (Buildings, Population)
     
-    :returns: DataFrame with [region_id, region_name, Taxonomy, data_type]
+    :returns: DataFrame with [region_id, region_name, Taxonomy, 'Dwellings']
     """
-    # Create DataFrame [id, region_name, Taxonomy, Dwellings (or Buildings)]
-    info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', data_type))
-    
+    info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', 'Dwellings'))
     
     # Iterate over VARIABLE 1
-    for var1 in data.columns[2:]:
+    for var1 in tqdm(data.columns[2:]):
         if var1 in mapping.var1:
             proportion = mapping.matrix[var1][0]
             bdg_classes = functions.split_tax(proportion)
             # print bdg_classes
             
             for bdg_class in bdg_classes:
+                dwellings = data[var1]
+                # Check for 'nan' or '-' values           
+                if isinstance(dwellings, (str, unicode)) == True:
+                    continue
+
                 fraction = bdg_class[0]
                 taxonomy = pd.DataFrame({'Taxonomy': [bdg_class[1]] * len(data)})
                 
-                values = data[var1] * fraction
-                # Need to add check for NaN and '-' values
+                values = dwellings * fraction
                 df = pd.concat([data.iloc[:,:2], taxonomy , values], axis=1)
-                df.columns = ['id', 'Region', 'Taxonomy', data_type]
-
-                info = pd.concat([info, df], ignore_index=True)
+                df.columns = ['id', 'Region', 'Taxonomy', 'Dwellings']        
+                info = pd.concat([info, df], ignore_index=True) 
         else:
             raise AssertionError('variable "%s", not found in mapping_matrix' % var1)
 
-    # Group values
     parse_data = info.groupby(['id','Region','Taxonomy'], as_index=False).sum()
 
     return parse_data
 
-data_file = 'example-data-noncrossed_variables.xlsx'
-data = pd.read_excel(data_file, sheetname=0)
-mapping = mapping_matrix(data_file, num_variables='one', sheetname='mapping_v1', header=1)
-
-test = parse_1var(data, mapping)

@@ -40,9 +40,9 @@ class mapping_matrix:
     '''
     Read a 'Mapping scheme' for assigning building classes
     One, two or three possible variables: 
-        var1: in the rows (e.g. floor material)
-        var2: in the first column (e.g. wall material)
-        var3: in the second column (e.g. type of dwelling)    
+        :var1: in the rows (e.g. floor material)
+        :var2: in the first column (e.g. wall material)
+        :var3: in the second column (e.g. type of dwelling)    
     '''
 
     def __init__(self, mapping_file, num_variables='two', row_var3=None, print_vars=True, **kwds):
@@ -55,6 +55,8 @@ class mapping_matrix:
         :param row_var3: Row index for var3 in the mapping scheme (starts in zero) 
             
         :param print_vars: True or False
+
+        :**kwds: Use keywords from pandas.read_excel
         '''
         
         self.mapping_file = mapping_file
@@ -65,27 +67,26 @@ class mapping_matrix:
         self.first_column = self.matrix.index.values
                     
         if print_vars == True:
-            print '''_____VARIABLE 1_____\n{}'''.format(self.var1)
+            print '''_____ VARIABLE 1 _____\n{}'''.format(self.var1)
                 
         if num_variables == 'two':
             self.var2 = self.first_column
             if print_vars == True:
-                print '''\n_____VARIABLE 2_____\n{}'''.format(self.var2)
+                print '''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2)
 
         if num_variables == 'three':
             assert (row_var3 != None), 'Define row_var3 (index for var3 in the mapping scheme)'
             self.var2 = self.first_column[ : row_var3]
             self.var3 = self.first_column[row_var3 : ]
-            self.second_mapping = self.matrix.iloc[row_var3] 
+            
+            second_mapping = self.matrix.iloc[row_var3:,:]
+            second_mapping.dropna(1, inplace=True)
+            second_mapping.rename(columns=second_mapping.iloc[0], inplace=True)
+            second_mapping.drop(second_mapping.index[0], inplace=True)
+            
+            self.second_mapping = second_mapping
             if print_vars == True:
-                print '''\n_____VARIABLE 2_____\n{}'''.format(self.var2, self.var3)
-                print '''\n_____VARIABLE 3_____\n{}\n'''.format(self.var2, self.var3)
+                print '''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2)
+                print '''\n_____ VARIABLE 3 _____\n{}\n'''.format(self.var3)
+                print '''\n_____ 2nd MAPPING _____\n{}\n'''.format(self.second_mapping.columns)
         
-
-mapping_file = 'example_mapping_scheme.xlsx'
-
-#mp = mapping_matrix(mapping_file, num_variables='one', print_vars=True, sheetname='mapping_2var', header=1)
-mp = mapping_matrix(mapping_file, num_variables='two', print_vars=True, sheetname='mapping_2var', header=2)
-#mp = mapping_matrix(mapping_file, num_variables='three', print_vars=True, row_var3=10, sheetname='mapping_2var', header=2)
-
-matrix = pd.read_excel(mapping_file, header=2, sheetname='mapping_2var')

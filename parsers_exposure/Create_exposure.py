@@ -45,21 +45,48 @@ The user can parse information based on one, two or three variables:
     
 """
 import os
+import pandas as pd
 
-import classes
-from mapping_matrix import mapping_matrix
+from mapping import mapping_matrix
+from get_values import parse_data
+
 
 folder = os.chdir('/Users/catalinayepes/python_code/parsers_exposure')
-file_location = 'example-data-noncrossed_variables.xlsx'        
+
+data_file = 'ex_data-noncrossed.xlsx'
+
+#%% 1 VARIABLE
+num_variables = 'one'
+mapping = mapping_matrix(data_file, num_variables, sheetname='mapping_1v', header=1)
+data = pd.read_excel(data_file, sheetname='variable_1')
+save_as = 'example_1var'
+res_1v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
 
 
-nickname = 'example'  # to add to the saved file
-num_var = 'two' # Number of variables in the data (small letter)
-#single_var = classes.ReadCensus(nickname, file_location, num_var)
+#%% 2 NON-CROSSED VARIABLES
+num_variables = 'two'
+mapping = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v', header=1)
+data_var1 = pd.read_excel(data_file, sheetname='variable_1')
+data_var2 = pd.read_excel(data_file, sheetname='variable_2')
+save_as = 'example_2vars-noncrossed'
+res_2v = parse_data([data_var1, data_var2], num_variables, mapping, save_as, cross_vars=False)
 
-mp = mapping_matrix(file_location, num_variables='one', print_vars=True, sheetname='mapping_v1_v2', header=1)
+
+#%% 2 CROSSED VARIABLES
+num_variables = 'two'
+data_file = 'ex_data-crossed.xlsx'
+data = pd.read_excel(data_file, sheetname='data_2vars')
+mapping = mapping_matrix(data_file, num_variables='two', sheetname='mapping_2var', header=2)
+save_as = 'example_2vars-crossed'
+res_2v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
 
 
-#parse_sheet = 'example_1var' # name or location of sheet to parse (example: 0 or 'Sheet1')
-#save_folder_name = 'example_1var' #folder name to save parsed data
-#single_var.parse_info(parse_sheet, save_regions=False, save_data=True)
+#%% 3 CROSSED VARIABLES
+num_variables = 'three'
+data_file = 'ex_data-crossed.xlsx'
+data = pd.read_excel(data_file, sheetname='data_3vars')
+mapping = mapping_matrix(data_file, num_variables='three', row_var3=9, sheetname='mapping_3var', header=2)
+save_as = 'example_3vars-crossed'
+res_3v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
+
+
