@@ -33,16 +33,6 @@
 Different functions for parsing an exposure model using census data.
 
 """
-import pandas as pd
-
-def contain(values_list, text):
-    for data in values_list:
-        validation = 'Incorrect'
-        if str(data).find(str(text)) == 0 and pd.isnull(text) != True:        
-            validation = 'Correct'
-            break                     
-    return validation
-
 def split_tax(name):
     '''Function for separating the taxonomies assigned to the same mapping scheme'''
     split_name = []
@@ -60,56 +50,9 @@ def split_tax(name):
         split_name.append([1.0, name])
         tot = 1
     assert (round(tot,4) == 1), "Error in the mapping scheme. Summ =! 100% \n  Review taxonomy:\n{}".format(name)
+    assert (split_name != []), 'Error, Taxonomy empty'    
     return split_name
         
-def info_append(info, values, id_region, name_region, dwellings):
-    '''Function to append values into a single DataFrame '''
-    if isinstance(dwellings, (str, unicode)) == True:
-        dwl = 0
-    else:
-        for i,var in enumerate(values):
-            dwl = dwellings * var[0]
-            info.loc[len(info)] = [id_region, name_region, var[1], dwl]
-    return info
-
-def mapping(var1, var2, var3, mp, num_variables):
-    """Function for mapping the census with the taxonomy string.
-    var1: in the rows (e.g. floor material)
-    var2: in the first column (e.g. wall material)
-    var3: in the second column (e.g. type of dwelling)
-    
-    'mp' is the DataFrame that cointains the mapping scheme.
-    """
-    # Find the location for variable1
-    col_var1 = [i for i, material in enumerate(mp.var1) if str(material) == var1]
-    
-    if num_variables is not 'one':
-        # Find the location for variable2
-        row_var2 = [i for i, material in enumerate(mp.col0) if str(material) == var2]        
-        # Find the initial taxonomy classification
-        tax1 = mp.iloc[row_var2[0], col_var1[0]]
-    else:
-        tax1 = mp.iloc[-1, col_var1[0]]
-
-    assert (tax1 != []), 'Error, Taxonomy empty'
-    taxo = split_tax(tax1)
-    
-    if num_variables == 'three':         
-        # Separate tax1 -->  if it has different taxonomies, and assign percentages
-        if (tax1.find('%') != -1) or (tax1.find('-') != -1):
-            taxo = split_tax(tax1)
-        else: 
-            # Find the index for variable3
-            row_var3 = [i for i, material in enumerate(mp.col0) if str(material).find(var3) != -1]
-            assert (row_var3 != []), 'It was not possible to find a match btw variable3 and mapping'
-            # Find the index for the 2nd mapping
-            col_2mapping = [i for i, tax in enumerate(mp.second_mapping) if str(tax).find(tax1) != -1]
-            assert (col_2mapping != []), 'It was not possible to find a match with the second mapping'
-            
-            tax2 = mp.iloc[row_var3[0],col_2mapping[0]]
-            taxo = split_tax(tax2)  
-    assert (taxo != []), 'The taxonomy is empty. Review material'
-    return taxo
 
 def mkdir_p(path):
     """Create a directory if it doesn't exist yet """
@@ -122,8 +65,3 @@ def mkdir_p(path):
             pass
         else:
             raise
-
-def clearall():
-    all = [var for var in globals() if var[0] != "_"]
-    for var in all:
-        del globals()[var]
