@@ -31,7 +31,6 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-import tqdm
 
 import functions
 
@@ -51,7 +50,7 @@ def parse_1var(data, mapping):
     info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', 'Dwellings'))
     
     # Iterate over VARIABLE 1
-    for var1 in tqdm(data.columns[2:]):
+    for var1 in data.columns[2:]:
         if var1 in mapping.var1:
             proportion = mapping.matrix[var1][0]
             bdg_classes = functions.split_tax(proportion)
