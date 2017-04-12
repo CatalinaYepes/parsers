@@ -52,7 +52,27 @@ def split_tax(name):
     assert (round(tot,4) == 1), "Error in the mapping scheme. Summ =! 100% \n  Review taxonomy:\n{}".format(name)
     assert (split_name != []), 'Error, Taxonomy empty'    
     return split_name
-        
+
+
+def reshape_expo_data(data, save_as=None):
+    '''
+    Reshape resulting exposure data to convert it as 1var_data
+    
+    :param data: Dataframe with columns:
+                 ['id', 'Region', 'Taxonomy', 'Dwellings']
+    
+    :param save_as: save reshaped data in file
+    '''    
+    rs_data = data.pivot(index='id', columns='Taxonomy', values='Dwellings')
+    
+    if save_as == None:
+        print '\n Data reshaped but not saved'
+    else:
+        rs_data.to_csv(save_as)
+        print '\n Reshaped data saved in %s' % save_as
+    
+    return rs_data
+    
 
 def mkdir_p(path):
     """Create a directory if it doesn't exist yet """
