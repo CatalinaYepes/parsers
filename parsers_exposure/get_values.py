@@ -92,12 +92,8 @@ def reshape_expo_data(data, save_as=None):
     
     :param save_as: save reshaped data in file
     '''    
-    rs_data = data.pivot(index='id', columns='Taxonomy', values='Dwellings')
-    
-    # Need to include the region in the resulting DataFrame
-    region_name = data[['id', 'Region']]
-    region_name = region_name[region_name.duplicated()]
-    #test = pd.merge(rs_data, region_name, left_on=rs_data.index, right_on='id')
+    rs_data = data.pivot_table(index=['id', 'Region'], columns='Taxonomy', values='Dwellings')
+    rs_data.reset_index(inplace=True)
     
     if save_as == None:
         print '\n Data reshaped but not saved'
