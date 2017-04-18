@@ -73,12 +73,12 @@ save_as = 'test/example_2vars-noncrossed'
 res_2v = parse_data([data_var1, data_var2], num_variables, mapping, save_as, cross_vars=False)
 
 # If combining with extra NON-crossed variables
-#data_vars1_2 = reshape_expo_data(res_2v, save_as='venetia')
-#data_var3 = pd.read_excel(data_file, sheetname='variable_3')
-#mapping_2 = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v_3v', header=1)
-#save_as = 'test/example_3vars-noncrossed'
-#output = parse_data([data_vars1_2, data_var3], num_variables, mapping_2, save_as, cross_vars=False)
-#
+data_vars1_2 = reshape_expo_data(res_2v, save_as='test/vars1_2')
+data_var3 = pd.read_excel(data_file, sheetname='variable_3')
+mapping_2 = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v_3v', header=1)
+save_as = 'test/example_3vars-noncrossed'
+output = parse_data([data_vars1_2, data_var3], num_variables, mapping_2, save_as, cross_vars=False)
+
 
 #%% 2 CROSSED VARIABLES
 num_variables = 'two'

@@ -1,0 +1,251 @@
+id,Region,Taxonomy,Dwellings
+reg_01,Camagüey,TAX_1,1778.4
+reg_01,Camagüey,TAX_2,1487.45
+reg_01,Camagüey,TAX_3,1138.25
+reg_01,Camagüey,TAX_4,1510.94
+reg_01,Camagüey,TAX_5,952.96
+reg_02,Carlos Manuel de Céspedes,TAX_1,538.91
+reg_02,Carlos Manuel de Céspedes,TAX_2,450.79
+reg_02,Carlos Manuel de Céspedes,TAX_3,345.28
+reg_02,Carlos Manuel de Céspedes,TAX_4,458.19
+reg_02,Carlos Manuel de Céspedes,TAX_5,289.83
+reg_03,Esmeralda,TAX_1,691.91
+reg_03,Esmeralda,TAX_2,577.75
+reg_03,Esmeralda,TAX_3,441.37
+reg_03,Esmeralda,TAX_4,587.46
+reg_03,Esmeralda,TAX_5,371.51
+reg_04,Florida,TAX_1,1106.17
+reg_04,Florida,TAX_2,925.46
+reg_04,Florida,TAX_3,708.3
+reg_04,Florida,TAX_4,939.64
+reg_04,Florida,TAX_5,591.43
+reg_05,Guáimaro,TAX_1,942.42
+reg_05,Guáimaro,TAX_2,787.35
+reg_05,Guáimaro,TAX_3,602.1
+reg_05,Guáimaro,TAX_4,800.58
+reg_05,Guáimaro,TAX_5,506.55
+reg_06,Jimaguayú,TAX_1,1415.67
+reg_06,Jimaguayú,TAX_2,1182.41
+reg_06,Jimaguayú,TAX_3,904.05
+reg_06,Jimaguayú,TAX_4,1202.53
+reg_06,Jimaguayú,TAX_5,761.34
+reg_07,Minas,TAX_1,1014.22
+reg_07,Minas,TAX_2,847.53
+reg_07,Minas,TAX_3,648.2
+reg_07,Minas,TAX_4,861.53
+reg_07,Minas,TAX_5,544.51
+reg_08,Najasa,TAX_1,956.11
+reg_08,Najasa,TAX_2,797.87
+reg_08,Najasa,TAX_3,609.42
+reg_08,Najasa,TAX_4,811.86
+reg_08,Najasa,TAX_5,514.75
+reg_09,Nuevitas,TAX_1,1277.2
+reg_09,Nuevitas,TAX_2,1071.3
+reg_09,Nuevitas,TAX_3,821.2
+reg_09,Nuevitas,TAX_4,1085.25
+reg_09,Nuevitas,TAX_5,678.06
+reg_10,Santa Cruz del Sur,TAX_1,1784.99
+reg_10,Santa Cruz del Sur,TAX_2,1492.26
+reg_10,Santa Cruz del Sur,TAX_3,1141.6
+reg_10,Santa Cruz del Sur,TAX_4,1516.45
+reg_10,Santa Cruz del Sur,TAX_5,957.71
+reg_11,Sibanicú,TAX_1,1055.44
+reg_11,Sibanicú,TAX_2,881.25
+reg_11,Sibanicú,TAX_3,673.64
+reg_11,Sibanicú,TAX_4,896.51
+reg_11,Sibanicú,TAX_5,568.16
+reg_12,Sierra de Cubitas,TAX_1,705.3
+reg_12,Sierra de Cubitas,TAX_2,590.43
+reg_12,Sierra de Cubitas,TAX_3,452.05
+reg_12,Sierra de Cubitas,TAX_4,599.27
+reg_12,Sierra de Cubitas,TAX_5,376.95
+reg_13,Vertientes,TAX_1,1478.04
+reg_13,Vertientes,TAX_2,1235.53
+reg_13,Vertientes,TAX_3,945.15
+reg_13,Vertientes,TAX_4,1255.74
+reg_13,Vertientes,TAX_5,793.54
+reg_14,Baraguá,TAX_1,1173.55
+reg_14,Baraguá,TAX_2,981.1
+reg_14,Baraguá,TAX_3,750.54
+reg_14,Baraguá,TAX_4,996.84
+reg_14,Baraguá,TAX_5,628.97
+reg_15,Bolivia,TAX_1,476.45
+reg_15,Bolivia,TAX_2,399.03
+reg_15,Bolivia,TAX_3,305.88
+reg_15,Bolivia,TAX_4,404.98
+reg_15,Bolivia,TAX_5,254.66
+reg_16,Chambas,TAX_1,844.11
+reg_16,Chambas,TAX_2,707.8
+reg_16,Chambas,TAX_3,542.45
+reg_16,Chambas,TAX_4,717.2
+reg_16,Chambas,TAX_5,448.44
+reg_17,Ciego de Ávila,TAX_1,2160.73
+reg_17,Ciego de Ávila,TAX_2,1806.75
+reg_17,Ciego de Ávila,TAX_3,1382.35
+reg_17,Ciego de Ávila,TAX_4,1835.67
+reg_17,Ciego de Ávila,TAX_5,1158.5
+reg_18,Ciro Redondo,TAX_1,1153.74
+reg_18,Ciro Redondo,TAX_2,965.37
+reg_18,Ciro Redondo,TAX_3,738.9
+reg_18,Ciro Redondo,TAX_4,980.11
+reg_18,Ciro Redondo,TAX_5,616.89
+reg_19,Florencia,TAX_1,813.15
+reg_19,Florencia,TAX_2,679.95
+reg_19,Florencia,TAX_3,520.53
+reg_19,Florencia,TAX_4,690.98
+reg_19,Florencia,TAX_5,436.4
+reg_20,Majagua,TAX_1,1044.03
+reg_20,Majagua,TAX_2,873.43
+reg_20,Majagua,TAX_3,668.17
+reg_20,Majagua,TAX_4,886.66
+reg_20,Majagua,TAX_5,557.71
+reg_21,Morón,TAX_1,379.04
+reg_21,Morón,TAX_2,317.03
+reg_21,Morón,TAX_3,242.6
+reg_21,Morón,TAX_4,322.07
+reg_21,Morón,TAX_5,203.26
+reg_22,Primero de Enero,TAX_1,647.14
+reg_22,Primero de Enero,TAX_2,541.47
+reg_22,Primero de Enero,TAX_3,414.44
+reg_22,Primero de Enero,TAX_4,549.78
+reg_22,Primero de Enero,TAX_5,346.17
+reg_23,Venezuela,TAX_1,791.22
+reg_23,Venezuela,TAX_2,661.57
+reg_23,Venezuela,TAX_3,506.14
+reg_23,Venezuela,TAX_4,672.11
+reg_23,Venezuela,TAX_5,423.96
+reg_24,Abreus,TAX_1,827.08
+reg_24,Abreus,TAX_2,691.15
+reg_24,Abreus,TAX_3,528.6
+reg_24,Abreus,TAX_4,702.67
+reg_24,Abreus,TAX_5,444.5
+reg_25,Aguada de Pasajeros,TAX_1,321.38
+reg_25,Aguada de Pasajeros,TAX_2,268.87
+reg_25,Aguada de Pasajeros,TAX_3,206.08
+reg_25,Aguada de Pasajeros,TAX_4,273.39
+reg_25,Aguada de Pasajeros,TAX_5,173.28
+reg_26,Cienfuegos,TAX_1,783.41
+reg_26,Cienfuegos,TAX_2,655.81
+reg_26,Cienfuegos,TAX_3,502.1
+reg_26,Cienfuegos,TAX_4,665.51
+reg_26,Cienfuegos,TAX_5,418.18
+reg_27,Cruces,TAX_1,775.03
+reg_27,Cruces,TAX_2,647.27
+reg_27,Cruces,TAX_3,494.85
+reg_27,Cruces,TAX_4,658.26
+reg_27,Cruces,TAX_5,416.59
+reg_28,Cumanayagua,TAX_1,1491.78
+reg_28,Cumanayagua,TAX_2,1245.12
+reg_28,Cumanayagua,TAX_3,951.6
+reg_28,Cumanayagua,TAX_4,1267.2
+reg_28,Cumanayagua,TAX_5,804.3
+reg_29,Lajas,TAX_1,569.44
+reg_29,Lajas,TAX_2,476.59
+reg_29,Lajas,TAX_3,364.84
+reg_29,Lajas,TAX_4,483.78
+reg_29,Lajas,TAX_5,304.34
+reg_30,Palmira,TAX_1,535.4
+reg_30,Palmira,TAX_2,447.32
+reg_30,Palmira,TAX_3,342.38
+reg_30,Palmira,TAX_4,455.12
+reg_30,Palmira,TAX_5,288.78
+reg_31,Rodas,TAX_1,987.17
+reg_31,Rodas,TAX_2,824.11
+reg_31,Rodas,TAX_3,629.62
+reg_31,Rodas,TAX_4,838.26
+reg_31,Rodas,TAX_5,530.85
+reg_32,Arroyo Naranjo,TAX_1,894.19
+reg_32,Arroyo Naranjo,TAX_2,746.31
+reg_32,Arroyo Naranjo,TAX_3,570.35
+reg_32,Arroyo Naranjo,TAX_4,759.46
+reg_32,Arroyo Naranjo,TAX_5,481.69
+reg_33,Boyeros,TAX_1,825.5
+reg_33,Boyeros,TAX_2,688.93
+reg_33,Boyeros,TAX_3,526.5
+reg_33,Boyeros,TAX_4,701.34
+reg_33,Boyeros,TAX_5,445.72
+reg_34,Centro Habana,TAX_1,1008.8
+reg_34,Centro Habana,TAX_2,842.77
+reg_34,Centro Habana,TAX_3,644.44
+reg_34,Centro Habana,TAX_4,856.91
+reg_34,Centro Habana,TAX_5,542.08
+reg_35,Cerro,TAX_1,3175.33
+reg_35,Cerro,TAX_2,2652.95
+reg_35,Cerro,TAX_3,2029.08
+reg_35,Cerro,TAX_4,2697.79
+reg_35,Cerro,TAX_5,1707.86
+reg_36,Cotorro,TAX_1,3666.6
+reg_36,Cotorro,TAX_2,3067.71
+reg_36,Cotorro,TAX_3,2347.95
+reg_36,Cotorro,TAX_4,3114.98
+reg_36,Cotorro,TAX_5,1961.77
+reg_37,Diez de Octubre,TAX_1,2323.78
+reg_37,Diez de Octubre,TAX_2,1940.07
+reg_37,Diez de Octubre,TAX_3,1482.95
+reg_37,Diez de Octubre,TAX_4,1973.86
+reg_37,Diez de Octubre,TAX_5,1251.34
+reg_38,Guanabacoa,TAX_1,1817.8
+reg_38,Guanabacoa,TAX_2,1518.08
+reg_38,Guanabacoa,TAX_3,1160.32
+reg_38,Guanabacoa,TAX_4,1544.0
+reg_38,Guanabacoa,TAX_5,977.8
+reg_39,La Habana del Este,TAX_1,1184.45
+reg_39,La Habana del Este,TAX_2,990.11
+reg_39,La Habana del Este,TAX_3,757.4
+reg_39,La Habana del Este,TAX_4,1006.27
+reg_39,La Habana del Este,TAX_5,635.78
+reg_40,La Habana Vieja,TAX_1,968.63
+reg_40,La Habana Vieja,TAX_2,808.32
+reg_40,La Habana Vieja,TAX_3,617.7
+reg_40,La Habana Vieja,TAX_4,822.8
+reg_40,La Habana Vieja,TAX_5,522.55
+reg_41,La Lisa,TAX_1,1928.07
+reg_41,La Lisa,TAX_2,1612.41
+reg_41,La Lisa,TAX_3,1233.74
+reg_41,La Lisa,TAX_4,1637.91
+reg_41,La Lisa,TAX_5,1032.87
+reg_42,Marianao,TAX_1,1025.53
+reg_42,Marianao,TAX_2,857.07
+reg_42,Marianao,TAX_3,655.83
+reg_42,Marianao,TAX_4,871.38
+reg_42,Marianao,TAX_5,551.2
+reg_43,Playa,TAX_1,1285.41
+reg_43,Playa,TAX_2,1075.15
+reg_43,Playa,TAX_3,822.75
+reg_43,Playa,TAX_4,1092.07
+reg_43,Playa,TAX_5,688.62
+reg_44,Plaza de la Revolución,TAX_1,583.13
+reg_44,Plaza de la Revolución,TAX_2,487.11
+reg_44,Plaza de la Revolución,TAX_3,372.17
+reg_44,Plaza de la Revolución,TAX_4,495.06
+reg_44,Plaza de la Revolución,TAX_5,312.53
+reg_45,Regla,TAX_1,1771.72
+reg_45,Regla,TAX_2,1479.16
+reg_45,Regla,TAX_3,1130.93
+reg_45,Regla,TAX_4,1505.2
+reg_45,Regla,TAX_5,954.99
+reg_46,San Miguel del Padrón,TAX_1,985.94
+reg_46,San Miguel del Padrón,TAX_2,825.17
+reg_46,San Miguel del Padrón,TAX_3,631.7
+reg_46,San Miguel del Padrón,TAX_4,837.74
+reg_46,San Miguel del Padrón,TAX_5,527.45
+reg_47,Bartolomé Maso,TAX_1,1733.46
+reg_47,Bartolomé Maso,TAX_2,1449.19
+reg_47,Bartolomé Maso,TAX_3,1108.65
+reg_47,Bartolomé Maso,TAX_4,1472.67
+reg_47,Bartolomé Maso,TAX_5,930.04
+reg_48,Bayamo,TAX_1,1640.66
+reg_48,Bayamo,TAX_2,1371.41
+reg_48,Bayamo,TAX_3,1049.04
+reg_48,Bayamo,TAX_4,1393.71
+reg_48,Bayamo,TAX_5,880.18
+reg_49,Buey Arriba,TAX_1,3501.21
+reg_49,Buey Arriba,TAX_2,2927.79
+reg_49,Buey Arriba,TAX_3,2240.43
+reg_49,Buey Arriba,TAX_4,2974.58
+reg_49,Buey Arriba,TAX_5,1877.0
+reg_50,Campechuela,TAX_1,2052.77
+reg_50,Campechuela,TAX_2,1714.41
+reg_50,Campechuela,TAX_3,1310.75
+reg_50,Campechuela,TAX_4,1743.73
+reg_50,Campechuela,TAX_5,1104.34

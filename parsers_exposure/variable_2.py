@@ -32,7 +32,7 @@
 
 import pandas as pd
 
-from functions import split_tax
+import functions
 
 
 def parse_2var_NonCrossed(data_var1, data_var2, mapping):
@@ -48,7 +48,7 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
         
     :returns: DataFrame with [region_id, region_name, Taxonomy, Dwellings]
     """
-
+    
     info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', 'Dwellings'))
     
     # Verify the variables have the same ragions:
@@ -67,7 +67,7 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
                 if var2 in mapping.var2:
                     #print var1, var2
                     proportion = mapping.matrix.loc[var2, var1]
-                    bdg_classes = split_tax(proportion)
+                    bdg_classes = functions.split_tax(proportion)
                     #print bdg_classes
                     
                     for bdg_class in bdg_classes:                    
@@ -108,6 +108,7 @@ def census_2var_Crossed(data, mapping):
     """
     
     # Rename columns to work faster using mapping variables
+    data = functions.check_DataFrame(data)
     col_names = list(mapping.var1)
     col_names.insert(0, 'variable_2')
     data.rename(columns={list(data)[x]:name for x, name in enumerate(col_names)}, inplace = True)
@@ -147,7 +148,7 @@ def census_2var_Crossed(data, mapping):
                     continue
                 
                 proportion = mapping.matrix.loc[var2, var1]
-                bdg_classes = split_tax(proportion)
+                bdg_classes = functions.split_tax(proportion)
 
                 for bdg_class in bdg_classes:                    
                     fraction = bdg_class[0]

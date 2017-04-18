@@ -32,7 +32,7 @@
 
 import pandas as pd
 
-from functions import split_tax
+import functions
 
 
 def get_bdg_classes(var1, var2, var3, mapping):
@@ -44,7 +44,7 @@ def get_bdg_classes(var1, var2, var3, mapping):
     else:
         proportion = mapping.second_mapping.loc[var3, ini_tax]
     
-    bdg_classes = split_tax(proportion)    
+    bdg_classes = functions.split_tax(proportion)    
     return proportion, bdg_classes
     
     
@@ -65,6 +65,7 @@ def census_3var_Crossed(data, mapping):
     """
     
     # Rename columns to work faster using the mapping variables as index/column
+    data = functions.check_DataFrame(data)
     col_names = list(mapping.var1)
     col_names.insert(0, 'variable_2')
     col_names.insert(1, 'variable_3')
