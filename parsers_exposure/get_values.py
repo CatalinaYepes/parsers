@@ -38,7 +38,7 @@ from variable_3 import census_3var_Crossed
 import variable_2
 
 
-def parse_data(data, num_variables, mapping, save_as=None, cross_vars=False):
+def parse_data(data, num_variables, mapping, save_as=None, cross_vars=True):
     '''parsing data from census
     several variables available:
         parse_sheet:      Name or number of the sheet to parse [mandatory]
