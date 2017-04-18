@@ -37,6 +37,7 @@ from variable_1 import parse_1var
 from variable_3 import census_3var_Crossed
 import variable_2
 
+
 def parse_data(data, num_variables, mapping, save_as=None, cross_vars=False):
     '''parsing data from census
     several variables available:
@@ -60,7 +61,7 @@ def parse_data(data, num_variables, mapping, save_as=None, cross_vars=False):
             print '\n Parsing 2 CROSSED VARIABLES data \n'
             info = variable_2.census_2var_Crossed(data, mapping)            
         else:
-            assert (isinstance(data, list) and len(data) == 2), 'using NON-CROSSED-VARIABLES, data mas be a list of two DataFrames'
+            assert (isinstance(data, list) and len(data) == 2), 'using NON-CROSSED-VARIABLES, data must be a list of two DataFrames'
             print '\n Parsing 2 NON-CROSSED VARIABLES data \n'
             info = variable_2.parse_2var_NonCrossed(data[0], data[1], mapping)
 
@@ -80,4 +81,30 @@ def parse_data(data, num_variables, mapping, save_as=None, cross_vars=False):
                  %s.csv''' % save_as
 
     return info
+
+
+def reshape_expo_data(data, save_as=None):
+    '''
+    Reshape resulting exposure data to convert it as 1var_data
+    
+    :param data: Dataframe with columns:
+                 ['id', 'Region', 'Taxonomy', 'Dwellings']
+    
+    :param save_as: save reshaped data in file
+    '''    
+    rs_data = data.pivot(index='id', columns='Taxonomy', values='Dwellings')
+    
+    # Need to include the region in the resulting DataFrame
+    region_name = data[['id', 'Region']]
+    region_name = region_name[region_name.duplicated()]
+    #test = pd.merge(rs_data, region_name, left_on=rs_data.index, right_on='id')
+    
+    if save_as == None:
+        print '\n Data reshaped but not saved'
+    else:
+        rs_data.to_csv(save_as + '.csv', index=False, encoding='utf-8')
+        print '\n Reshaped data saved in %s' % save_as
+    
+    return rs_data
+    
         

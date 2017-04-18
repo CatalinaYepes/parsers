@@ -32,7 +32,8 @@
 
 import pandas as pd
 
-import functions
+from functions import split_tax
+
 
 def get_bdg_classes(var1, var2, var3, mapping):
     ''' Get mapping fraction when using 3 variables'''
@@ -43,7 +44,7 @@ def get_bdg_classes(var1, var2, var3, mapping):
     else:
         proportion = mapping.second_mapping.loc[var3, ini_tax]
     
-    bdg_classes = functions.split_tax(proportion)    
+    bdg_classes = split_tax(proportion)    
     return proportion, bdg_classes
     
     

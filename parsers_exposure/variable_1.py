@@ -32,7 +32,8 @@
 
 import pandas as pd
 
-import functions
+from functions import split_tax
+
 
 def parse_1var(data, mapping):
     """
@@ -53,7 +54,7 @@ def parse_1var(data, mapping):
     for var1 in data.columns[2:]:
         if var1 in mapping.var1:
             proportion = mapping.matrix[var1][0]
-            bdg_classes = functions.split_tax(proportion)
+            bdg_classes = split_tax(proportion)
             # print bdg_classes
             
             for bdg_class in bdg_classes:

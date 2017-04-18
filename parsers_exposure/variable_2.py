@@ -32,7 +32,8 @@
 
 import pandas as pd
 
-import functions
+from functions import split_tax
+
 
 def parse_2var_NonCrossed(data_var1, data_var2, mapping):
     """
@@ -66,7 +67,7 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
                 if var2 in mapping.var2:
                     #print var1, var2
                     proportion = mapping.matrix.loc[var2, var1]
-                    bdg_classes = functions.split_tax(proportion)
+                    bdg_classes = split_tax(proportion)
                     #print bdg_classes
                     
                     for bdg_class in bdg_classes:                    
@@ -146,7 +147,7 @@ def census_2var_Crossed(data, mapping):
                     continue
                 
                 proportion = mapping.matrix.loc[var2, var1]
-                bdg_classes = functions.split_tax(proportion)
+                bdg_classes = split_tax(proportion)
 
                 for bdg_class in bdg_classes:                    
                     fraction = bdg_class[0]

@@ -49,6 +49,7 @@ import pandas as pd
 
 from mapping import mapping_matrix
 from get_values import parse_data
+from get_values import reshape_expo_data
 
 
 folder = os.chdir('/Users/catalinayepes/python_code/parsers_exposure')
@@ -59,7 +60,7 @@ data_file = 'ex_data-noncrossed.xlsx'
 num_variables = 'one'
 mapping = mapping_matrix(data_file, num_variables, sheetname='mapping_1v', header=1)
 data = pd.read_excel(data_file, sheetname='variable_1')
-save_as = 'example_1var'
+save_as = 'test/example_1var'
 res_1v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
 
 
@@ -68,16 +69,23 @@ num_variables = 'two'
 mapping = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v', header=1)
 data_var1 = pd.read_excel(data_file, sheetname='variable_1')
 data_var2 = pd.read_excel(data_file, sheetname='variable_2')
-save_as = 'example_2vars-noncrossed'
+save_as = 'test/example_2vars-noncrossed'
 res_2v = parse_data([data_var1, data_var2], num_variables, mapping, save_as, cross_vars=False)
 
+# If combining with extra NON-crossed variables
+#data_vars1_2 = reshape_expo_data(res_2v, save_as='venetia')
+#data_var3 = pd.read_excel(data_file, sheetname='variable_3')
+#mapping_2 = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v_3v', header=1)
+#save_as = 'test/example_3vars-noncrossed'
+#output = parse_data([data_vars1_2, data_var3], num_variables, mapping_2, save_as, cross_vars=False)
+#
 
 #%% 2 CROSSED VARIABLES
 num_variables = 'two'
 data_file = 'ex_data-crossed.xlsx'
 data = pd.read_excel(data_file, sheetname='data_2vars')
 mapping = mapping_matrix(data_file, num_variables='two', sheetname='mapping_2var', header=2)
-save_as = 'example_2vars-crossed'
+save_as = 'test/example_2vars-crossed'
 res_2v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
 
 
@@ -86,7 +94,7 @@ num_variables = 'three'
 data_file = 'ex_data-crossed.xlsx'
 data = pd.read_excel(data_file, sheetname='data_3vars')
 mapping = mapping_matrix(data_file, num_variables='three', row_var3=9, sheetname='mapping_3var', header=2)
-save_as = 'example_3vars-crossed'
+save_as = 'test/example_3vars-crossed'
 res_3v = parse_data(data, num_variables, mapping, save_as, cross_vars=True)
 
 
