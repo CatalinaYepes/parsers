@@ -21,14 +21,23 @@ print result_1var.head(5)
 
 
 #%% TEST 2 VARIABLES - NON-CROSSED VARS
+num_variables = 'two'
 data_file = '../ex_data-noncrossed.xlsx'
 data_var1 = pd.read_excel(data_file, sheetname=0)
 data_var2 = pd.read_excel(data_file, sheetname=1)
-mapping = mapping_matrix(data_file, num_variables='two', sheetname='mapping_1v_2v', header=1)
+mapping = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v', header=1)
 
 result_2var = variable_2.parse_2var_NonCrossed(data_var1, data_var2, mapping)
 
 print result_2var.head(5)
+
+# If combining with extra NON-crossed variables
+data_vars1_2 = reshape_expo_data(result_2var)
+data_var3 = pd.read_excel(data_file, sheetname='variable_3')
+mapping_2 = mapping_matrix(data_file, num_variables, sheetname='mapping_1v_2v_3v', header=1)
+save_as = 'test/example_3vars-noncrossed'
+output = variable_2.parse_2var_NonCrossed(data_vars1_2, data_var3, mapping_2)
+
 
 
 #%% TEST 2 VARIABLES - CROSSED VARS
