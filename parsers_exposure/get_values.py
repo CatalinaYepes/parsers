@@ -72,8 +72,8 @@ def parse_data(data, num_variables, mapping, save_as=None, cross_vars=True):
         else:
             raise AssertionError('3 variables must be CROSSED')
             
-    # Round Dwellings/Buildings to 2 decimals places
-    info.iloc[:,3] = info.iloc[:,3].round(2)
+    # Round Dwellings/Buildings to 1 decimal place
+    info.iloc[:,3] = info.iloc[:,3].round(1)
     
     if save_as:
         info.to_csv(save_as + '.csv', index=False, encoding='utf-8')
