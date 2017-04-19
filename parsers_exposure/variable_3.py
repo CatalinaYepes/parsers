@@ -83,7 +83,7 @@ def census_3var_Crossed(data, mapping):
         if str(var2).find('AREA') != -1:
             region_name = data.iloc[row_var2, 1]
             region_id = data.variable_2[row_var2]
-            print 'Region: {}, {}'.format(region_id, region_name)
+            print '{}, {}'.format(region_id, region_name)
             continue
         elif var2 == 'RESUMEN' or var2 == 'SUMMARY':
             region_name = 'SUMMARY'
