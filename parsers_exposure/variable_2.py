@@ -61,32 +61,30 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
     
     # Iterate over VARIABLE 1
     for var1 in data_var1.columns[2:]:
-        if var1 in mapping.var1:
-           # Iterate over VARIABLE 2
-            for var2 in data_var2.columns[2:]:
+        # Iterate over VARIABLE 2
+        for var2 in data_var2.columns[2:]: 
+            #print var1, var2
+            if var1 in mapping.var1:
                 if var2 in mapping.var2:
-                    #print var1, var2
                     proportion = mapping.matrix.loc[var2, var1]
                     bdg_classes = functions.split_tax(proportion)
-                    #print bdg_classes
-                    
-                    for bdg_class in bdg_classes:                    
-                        fraction = bdg_class[0]
-                        taxonomy = pd.DataFrame({'Taxonomy': [bdg_class[1]] * len(data_var1)})
-                        
-                        values = data_var1[var1] * data_var2[var2] / var2_total * fraction
-                        # Need to add check for NaN and '-' values
-                        df = pd.concat([data_var1.iloc[:,:2], taxonomy , values], axis=1)
-                        df.columns = ['id', 'Region', 'Taxonomy', 'Dwellings']
-        
-                        info = pd.concat([info, df], ignore_index=True)
-
                 else:
-                    raise AssertionError("Error in variable 2\n Variable '{}' not found in: \n{}".format(var2, mapping.var2))
-    
-        else:
-            raise AssertionError("variable '{}' not found in: \n{}".format(var1, mapping.var1))
- 
+                    bdg_classes = [[1.0, var2]]
+            else:
+                bdg_classes = [[1.0, var1]]
+            #print bdg_classes
+            
+            for bdg_class in bdg_classes:
+                fraction = bdg_class[0]
+                taxonomy = pd.DataFrame({'Taxonomy': [bdg_class[1]] * len(data_var1)})
+                
+                values = data_var1[var1] * data_var2[var2] / var2_total * fraction
+                # Need to add check for NaN and '-' values
+                df = pd.concat([data_var1.iloc[:,:2], taxonomy , values], axis=1)
+                df.columns = ['id', 'Region', 'Taxonomy', 'Dwellings']
+
+                info = pd.concat([info, df], ignore_index=True)
+
     parse_data = info.groupby(['id','Region','Taxonomy'], as_index=False).sum()
 
     return parse_data
