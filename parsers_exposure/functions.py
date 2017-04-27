@@ -42,11 +42,12 @@ def split_tax(name):
         tot = 0
         data =  name.split('\n')
         for val in data:
-            value = str(val).split('% ')
-            percentage = float(value[0])/100
-            taxonomy = value[1]
-            split_name.append([percentage, taxonomy])
-            tot += percentage
+            if not val == '':
+                value = str(val).split('% ')
+                percentage = float(value[0])/100
+                taxonomy = value[1]
+                split_name.append([percentage, taxonomy])
+                tot += percentage
     else:
         split_name.append([1.0, name])
         tot = 1
