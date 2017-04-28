@@ -71,9 +71,18 @@ def parse_data(data, num_variables, mapping, save_as=None, cross_vars=True):
             info = census_3var_Crossed(data, mapping)
         else:
             raise AssertionError('3 variables must be CROSSED')
-            
-    # Round Dwellings/Buildings to 1 decimal place
-    info.iloc[:,3] = info.iloc[:,3].round(1)
+    
+    tot_census_dwl = info.iloc[:,3].sum()  
+    # Round Dwellings/Buildings to 0 decimal place
+    info.iloc[:,3] = info.iloc[:,3].round(0)
+    # Save exposure oly for Dwellings >= 1    
+    info = info[info.iloc[:,3] >= 1.0]
+    tot_exposure_dwl = info.iloc[:,3].sum()
+    
+    print '''
+        Total census dwellings:  {}
+        Total exposure dwellings: {}
+        Difference: {}%'''.format(tot_census_dwl, tot_exposure_dwl, round(tot_exposure_dwl / tot_census_dwl, 1))
     
     if save_as:
         info.to_csv(save_as + '.csv', index=False, encoding='utf-8')
