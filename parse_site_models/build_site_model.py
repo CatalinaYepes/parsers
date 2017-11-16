@@ -2,6 +2,8 @@
 Given a list of sites or asset locations, and another list of
 points at which Vs30 values have been measured / inferred,
 extract Vs30 values from the points closest to the input sites
+
+@author: anirudh.rao
 """
 
 import numpy as np
@@ -17,7 +19,7 @@ def _calculate_z1p0(vs30):
     Reads an array of Vs30 values (in m/s) and
     returns the depth to the 1.0 km/s velocity horizon (in m)
 
-    :param vs30: the shear wave velocity (in m/s) at a depth of 30 m
+    :param vs30: the shear wave velocity (in m/s) at a depth of 30m
     """
     c1 = 6.745
     c2 = 1.35
