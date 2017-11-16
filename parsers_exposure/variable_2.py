@@ -30,9 +30,9 @@
 #
 # -*- coding: utf-8 -*-
 
-import pandas as pd
-
 import functions
+import pandas as pd
+from pandas.util.testing import assert_frame_equal
 
 
 def parse_2var_NonCrossed(data_var1, data_var2, mapping):
@@ -54,7 +54,7 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
     # Verify the variables have the same ragions:
     regions_var1 = data_var1.iloc[:,:2]
     regions_var2 = data_var2.iloc[:,:2]
-    assert (pd.DataFrame.equals(regions_var1 , regions_var2) == True), 'Regions in variables are different'
+    assert_frame_equal(regions_var1 , regions_var2, check_dtype=False)
     
     # Include total value of var2 to estimate fractions
     var2_total = data_var2.iloc[:,2:].sum(axis=1)
