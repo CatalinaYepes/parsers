@@ -78,7 +78,11 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     group_data = data.groupby(join_data_by, as_index=False).sum()
     
     records = pd.merge(left=shape, right=group_data, how='left', left_on=join_shape_by, right_on=join_data_by)
-    records.drop(join_data_by, axis=1, inplace=True)    
+    if join_data_by in records:
+        if join_data_by != join_shape_by:
+            records.drop(join_data_by, axis=1, inplace=True)
+    else:
+        records.drop(join_data_by + '_y', axis=1, inplace=True)
     records.fillna(0, inplace=True)
 
     # Raise error when columns are not properly merged

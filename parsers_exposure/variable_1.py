@@ -49,7 +49,7 @@ def parse_1var(data, mapping):
     :returns: DataFrame with [region_id, region_name, Taxonomy, 'Dwellings']
     """
     info = pd.DataFrame(columns=('id', 'Region', 'Taxonomy', 'Dwellings'))
-    
+
     # Iterate over VARIABLE 1
     for var1 in data.columns[2:]:
         if var1 in mapping.var1:
@@ -58,7 +58,7 @@ def parse_1var(data, mapping):
             # print bdg_classes
             
             for bdg_class in bdg_classes:
-                dwellings = data[var1]
+                dwellings = pd.to_numeric(data[var1], errors='coerce')
                 # Check for 'nan' or '-' values           
                 if isinstance(dwellings, (str, unicode)) == True:
                     continue
@@ -70,6 +70,8 @@ def parse_1var(data, mapping):
                 df = pd.concat([data.iloc[:,:2], taxonomy , values], axis=1)
                 df.columns = ['id', 'Region', 'Taxonomy', 'Dwellings']        
                 info = pd.concat([info, df], ignore_index=True) 
+        elif var1.find('Total') != -1:
+            break
         else:
             raise AssertionError('variable "%s", not found in mapping_matrix' % var1)
 
