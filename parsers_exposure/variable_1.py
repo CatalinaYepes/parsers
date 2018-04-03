@@ -32,7 +32,7 @@
 
 import pandas as pd
 
-from functions import split_tax
+from parsers_exposure.functions import split_tax
 
 
 def parse_1var(data, mapping):
@@ -60,7 +60,7 @@ def parse_1var(data, mapping):
             for bdg_class in bdg_classes:
                 dwellings = pd.to_numeric(data[var1], errors='coerce')
                 # Check for 'nan' or '-' values           
-                if isinstance(dwellings, (str, unicode)) == True:
+                if isinstance(dwellings, (str, bytes)) == True:
                     continue
 
                 fraction = bdg_class[0]

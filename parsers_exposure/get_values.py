@@ -29,13 +29,13 @@
 # See the GNU General Public License for more details.
 #
 # -*- coding: utf-8 -*-
-import sys    # sys.setdefaultencoding is cancelled by site.py
-reload(sys)    # to re-enable sys.setdefaultencoding()
-sys.setdefaultencoding('utf-8')
+#import sys    # sys.setdefaultencoding is cancelled by site.py
+#reload(sys)    # to re-enable sys.setdefaultencoding()
+#sys.setdefaultencoding('utf-8')
 
-from variable_1 import parse_1var
-from variable_3 import census_3var_Crossed
-import variable_2
+from parsers_exposure.variable_1 import parse_1var
+from parsers_exposure.variable_3 import census_3var_Crossed
+from parsers_exposure import variable_2
 
 
 def parse_data(data, num_variables, mapping, save_as=None, cross_vars=True):
@@ -50,44 +50,46 @@ def parse_data(data, num_variables, mapping, save_as=None, cross_vars=True):
     
     : returns info: DataFrame [id, Region, Taxonomy, Dwellings (or Buildings)]
     '''
-    print '\nParsing data for %s \n' % save_as
+    print ('\nParsing data for %s \n' % save_as)
     
     if num_variables == 'one':
-        print '\n Parsing 1 VARIABLE data \n'
+        print ('\n Parsing 1 VARIABLE data \n')
         info = parse_1var(data, mapping)
 
     elif num_variables == 'two':
         if cross_vars == True:
-            print '\n Parsing 2 CROSSED VARIABLES data \n'
+            print ('\n Parsing 2 CROSSED VARIABLES data \n')
             info = variable_2.census_2var_Crossed(data, mapping)            
         else:
             assert (isinstance(data, list) and len(data) == 2), 'using NON-CROSSED-VARIABLES, data must be a list of two DataFrames'
-            print '\n Parsing 2 NON-CROSSED VARIABLES data \n'
+            print ('\n Parsing 2 NON-CROSSED VARIABLES data \n')
             info = variable_2.parse_2var_NonCrossed(data[0], data[1], mapping)
 
     elif num_variables == 'three':
         if cross_vars == True:
-            print '\n Parsing 3 CROSSED VARIABLES data \n'
+            print ('\n Parsing 3 CROSSED VARIABLES data \n')
             info = census_3var_Crossed(data, mapping)
         else:
             raise AssertionError('3 variables must be CROSSED')
+
+    assert (info.empty == False), 'Empty DataFrame'
     
-    tot_census_dwl = info.iloc[:,3].sum()  
-    # Round Dwellings/Buildings to 0 decimal place
-    info.iloc[:,3] = info.iloc[:,3].round(0)
-    # Save exposure oly for Dwellings >= 1    
-    info = info[info.iloc[:,3] >= 1.0]
-    tot_exposure_dwl = info.iloc[:,3].sum()
-    
-    print '''
-        Total census dwellings:  {}
-        Total exposure dwellings: {}
-        Difference: {}%'''.format(tot_census_dwl, tot_exposure_dwl, round(tot_exposure_dwl / tot_census_dwl, 1))
+    tot_census_dwl = info.iloc[:,3].sum()
+    print ('Total census dwellings: %s' % tot_census_dwl)
+    # # Round Dwellings/Buildings to 2 decimal places
+    # info.iloc[:,3] = info.iloc[:,3].round(2)
+    # # Save exposure oly for Dwellings >= 0.5    
+    # info = info[info.iloc[:,3] >= 0.5]
+    #tot_exposure_dwl = info.iloc[:,3].sum()   
+    #print ('''
+    #    Total census dwellings:  {}
+    #    Total exposure dwellings: {}
+    #    Difference: {}%'''.format(tot_census_dwl, tot_exposure_dwl, round(tot_exposure_dwl / tot_census_dwl, 1)))
     
     if save_as:
         info.to_csv(save_as + '.csv', index=False, encoding='utf-8')
-        print '''Data saved in:
-                 %s.csv''' % save_as
+        print ('''Data saved in:
+                 %s.csv''' % save_as)
 
     return info
 
@@ -105,10 +107,10 @@ def reshape_expo_data(data, save_as=None):
     rs_data.reset_index(inplace=True)
     
     if save_as == None:
-        print '\n Data reshaped but not saved'
+        print ('\n Data reshaped but not saved')
     else:
         rs_data.to_csv(save_as + '.csv', index=False, encoding='utf-8')
-        print '\n Reshaped data saved in %s' % save_as
+        print ('\n Reshaped data saved in %s' % save_as)
     
     return rs_data
     

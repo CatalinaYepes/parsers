@@ -6,8 +6,9 @@ Select files inside a folder
 """
 
 import os
-
-def select_files(folder=".", start="", end="", contain=""):
+            
+                            
+def select_files(folder=".", start="", end="", contain="", include_path=False):
     '''Function to select files inside a folder
         
         :folder: folder name, by default current one
@@ -24,10 +25,22 @@ def select_files(folder=".", start="", end="", contain=""):
     for file_name in os.listdir(folder):
         if file_name.startswith(start):
             if file_name.endswith(end):
-                if file_name.find(contain) != -1:
-                    files.append(file_name)
+                if isinstance(contain, str):                    
+                    if file_name.find(contain) != -1:
+                        if include_path==True:
+                            files.append(os.path.join(folder, file_name))
+                        else:
+                            files.append(file_name)
+                else:
+                    for conts in contain:
+                        if file_name.find(conts) != -1:
+                            if include_path==True:
+                                files.append(os.path.join(folder, file_name))
+                            else:
+                                files.append(file_name)
     if len(files) == 1:
         return files[0]
     else:
         assert len(files) != 0, '\nNo files selected\n'
+        files.sort()
         return files

@@ -37,7 +37,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     sf = shapefile.Reader(shape_file)
     
     fields = [x[0] for x in sf.fields[1:]] 
-    #print '\n Shapefile columns: \n %s \n' % fields     
+    #print ('\n Shapefile columns: \n %s \n' % fields)   
     shape = pd.DataFrame(sf.records(), columns=fields)
     
     
@@ -59,7 +59,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     if not join_data_by in data.columns:
         data = join_col.join(data)
     add_cols = data.drop(join_data_by, axis=1).columns    
-    #print '\n Column headers in data: \n', list(data.columns)    
+    #print ('\n Column headers in data: \n', list(data.columns))
     
 
     #  3) Additional checks
@@ -106,7 +106,7 @@ def join_to_shape(shape_file, data_file, join_shape_by, join_data_by, columns=No
     # Save as a new shapefile (or write over the old one)
     if save_as == None:        
         save_as = shape_file.split('.')[0] + '_join'
-    print '\n Saving shape file in %s' % save_as
+    print ('\n Saving shape file in %s' % save_as)
     w.save(save_as) 
 
     return records

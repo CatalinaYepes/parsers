@@ -30,9 +30,9 @@
 #
 # -*- coding: utf-8 -*-
 
-import functions
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
+from parsers_exposure import functions
 
 
 def parse_2var_NonCrossed(data_var1, data_var2, mapping):
@@ -63,7 +63,7 @@ def parse_2var_NonCrossed(data_var1, data_var2, mapping):
     for var1 in data_var1.columns[2:]:
         # Iterate over VARIABLE 2
         for var2 in data_var2.columns[2:]: 
-            print var1, var2
+            print (var1, var2)
             if var1 in mapping.var1:
                 if var2 in mapping.var2:
                     proportion = mapping.matrix.loc[var2, var1]
@@ -127,26 +127,26 @@ def census_2var_Crossed(data, mapping):
         if str(var2).find('AREA') != -1:
             region_name = data.iloc[row_var2, 1]
             region_id = data.variable_2[row_var2]
-            #print 'Region: {}, {}'.format(region_id, region_name)
+            #print ('Region: {}, {}'.format(region_id, region_name)
             continue
         elif str(var2).find('Total') != -1 or str(var2).find('RESUMEN') != -1 or str(var2).find('SUMMARY') != -1:
             region_name = 'SUMMARY'
             continue  # We can't use `break` because some data has summary for each region
         
         if var2 in mapping.var2 and (region_name != 'SUMMARY'):
-            #print 'var2: ', var2
+            #print ('var2: ', var2
          
             # Iterate over VARIABLE 1
             for var1 in mapping.var1:
                 if  str(var1).find('Total') != -1:
-                    print '''--- End of the variable1'''
+                    print ('''--- End of the variable1''')
                     break
-                #print 'var1:', var1
+                #print ('var1:', var1
                 
                 dwellings = data[var1][row_var2]
                 #print ('''There are {} dwellings with:\n  var1: {}\n  var2: {}''').format(dwellings, var1, var2)                
                 # Check for 'nan' or '-' values           
-                if isinstance(dwellings, (str, unicode)) == True:
+                if isinstance(dwellings, (str, bytes)) == True:
                     continue
                 
                 proportion = mapping.matrix.loc[var2, var1]
@@ -160,13 +160,13 @@ def census_2var_Crossed(data, mapping):
                     info.append([region_id, region_name, taxonomy , values])
     
         elif str(var2).find('Total') != -1:
-            #print '---End of the region {} ---'.format(region_name)
+            #print ('---End of the region {} ---'.format(region_name)
             continue
         elif var2 == 'RESUMEN' or var2 == 'SUMMARY':
-            #print '-----END-----'
+            #print ('-----END-----'
             break
         else:
-            #print '.'
+            #print ('.'
             continue  
     
     info = pd.DataFrame(info, columns=('id', 'Region', 'Taxonomy', 'Dwellings'))

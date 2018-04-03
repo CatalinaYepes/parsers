@@ -31,8 +31,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-
-import functions
+from parsers_exposure import functions
 
 
 def get_bdg_classes(var1, var2, var3, mapping):
@@ -83,7 +82,7 @@ def census_3var_Crossed(data, mapping):
         if str(var2).find('AREA') != -1:
             region_name = data.iloc[row_var2, 1]
             region_id = data.variable_2[row_var2]
-            print '{}, {}'.format(region_id, region_name)
+            print ('{}, {}'.format(region_id, region_name))
             continue
         elif var2 == 'RESUMEN' or var2 == 'SUMMARY':
             region_name = 'SUMMARY'
@@ -95,7 +94,7 @@ def census_3var_Crossed(data, mapping):
             # Iterate over VARIABLE 1
             for var1 in mapping.var1:
                 if  var1 == 'Total':
-                    #print '''--- End of the variable1'''
+                    #print ('''--- End of the variable1'''
                     break
                 #print var1, '-->', var1
                 
@@ -105,13 +104,13 @@ def census_3var_Crossed(data, mapping):
                     var3 = data.variable_3[row_var2 + i]
 
                     if var3.find('Total') != -1:
-#                        print '''--- End of the variable3'''
+#                        print ('''--- End of the variable3'''
                         break
                     else:
                         dwellings = data[var1][row_var2 + i]
                         #print ('''There are {} dwellings with:\n  var1: {}\n  var2: {}''').format(dwellings, var1, var2)                        
                         # Check for 'nan' or '-' values           
-                        if isinstance(dwellings, (str, unicode)) == True:
+                        if isinstance(dwellings, (str, bytes)) == True:
                             i += 1
                             continue
                         
@@ -126,13 +125,13 @@ def census_3var_Crossed(data, mapping):
                     i += 1
         
         elif var2 == 'Total':
-            #print '---End of the region {} ---'.format(region_name)
+            #print ('---End of the region {} ---'.format(region_name)
             continue
         elif var2 == 'RESUMEN' or var2 == 'SUMMARY':
-            #print '-----END-----'
+            #print ('-----END-----'
             break
         else:
-            #print '.'
+            #print ('.'
             continue  
     
     info = pd.DataFrame(info, columns=('id', 'Region', 'Taxonomy', 'Dwellings'))

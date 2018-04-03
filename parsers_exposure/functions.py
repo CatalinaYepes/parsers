@@ -60,7 +60,7 @@ def check_DataFrame(data):
     '''Check that `VARIABLE 2` is not in the index of the DF'''
     if not data.index.is_monotonic:
         data.reset_index(inplace=True)
-        print 'Reset Index in DataFrame'
+        print ('Reset Index in DataFrame')
     
     return data
 

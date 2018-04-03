@@ -33,8 +33,8 @@
 import sys    # sys.setdefaultencoding is cancelled by site.py
 import pandas as pd
 
-reload(sys)    # to re-enable sys.setdefaultencoding()
-sys.setdefaultencoding('utf-8')
+#reload(sys)    # to re-enable sys.setdefaultencoding()
+#sys.setdefaultencoding('utf-8')
 
 class mapping_matrix:
     '''
@@ -60,19 +60,19 @@ class mapping_matrix:
         '''
         
         self.mapping_file = mapping_file
-        print '''\n mapping_matrix: {} \n'''.format(mapping_file) 
+        print ('''\n mapping_matrix: {} \n'''.format(mapping_file))
         self.matrix = pd.read_excel(mapping_file, **kwds)
         
         self.var1 = self.matrix.columns.values
         self.first_column = self.matrix.index.values
                     
         if print_vars == True:
-            print '''_____ VARIABLE 1 _____\n{}'''.format(self.var1)
+            print ('''_____ VARIABLE 1 _____\n{}'''.format(self.var1))
                 
         if num_variables == 'two':
             self.var2 = self.first_column
             if print_vars == True:
-                print '''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2)
+                print ('''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2))
 
         if num_variables == 'three':
             assert (row_var3 != None), 'Define row_var3 (index for var3 in the mapping scheme)'
@@ -86,7 +86,7 @@ class mapping_matrix:
             
             self.second_mapping = second_mapping
             if print_vars == True:
-                print '''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2)
-                print '''\n_____ VARIABLE 3 _____\n{}\n'''.format(self.var3)
-                print '''\n_____ 2nd MAPPING _____\n{}\n'''.format(self.second_mapping.columns)
+                print ('''\n_____ VARIABLE 2 _____\n{}'''.format(self.var2))
+                print ('''\n_____ VARIABLE 3 _____\n{}\n'''.format(self.var3))
+                print ('''\n_____ 2nd MAPPING _____\n{}\n'''.format(self.second_mapping.columns))
         
